@@ -6,11 +6,14 @@ class Produto {
     private $nome;
     private $preco;
     private $quantidade;
-
+    
     public function setProduto($data){
+        $conn = new Database;
         $this->nome = $data[0];
         $this->preco = $data[1];
         $this->quantidade = $data[2];
+        $conn->insertData($this->nome, $this->preco, $this->quantidade);
+        
     }
 
     public function getProduto(){
@@ -53,9 +56,24 @@ class Database {
 
     }
 
-    public function insertData(){
-        //para fazer ainda
-        return "";
+    public function insertData($nome, $preco, $quantidade){
+        $checkData = $this->connection->query("SELECT * FROM produtos WHERE nome = '$nome'");
+        $query = "INSERT INTO produtos (nome, preco, quantidade, data_cadastro) VALUES ('$nome', $preco, $quantidade, NOW())";
+
+        if($checkData->num_rows > 0){
+            echo "O produto já está cadastrado no sistema. Não foi inserido.";
+        } else {
+            if($this->connection->query($query) === TRUE){
+                echo "Produto inserido com sucesso.";
+            }else{
+                echo "Erro ao inserir o produto: " . $this->connection->error;
+            }
+        }
+
+    }
+
+    public function closeConnection(){
+        
     }
 }
 ?>
