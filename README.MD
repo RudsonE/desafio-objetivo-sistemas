@@ -1,7 +1,7 @@
 
 ### Sistema PDV - Desafio de Estágio 💻🚀
 
-Bem-vindo ao Desafio de Estágio👋🎉 Este é um sistema PHP desenvolvido para simular um Ponto de Venda (PDV) básico, onde você pode cadastrar produtos, realizar vendas e verificar o histórico de vendas.
+Bem-vindo ao meu Desafio de Estágio👋🎉 Este é um sistema PHP desenvolvido para simular um Ponto de Venda (PDV) básico, onde você pode cadastrar produtos, realizar vendas e verificar o histórico de vendas.
 
 ## Como Começar
 
