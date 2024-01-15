@@ -16,8 +16,37 @@ class Produto {
         
     }
 
-    public function getProduto(){
-        return array($this->nome, $this->preco, $this->quantidade);
+    public function getProdutos(){
+        $conn = new Database;
+        $query = "SELECT * FROM produtos";
+
+        try{
+            $results = $conn->getConnection()->query($query);
+            if($results->num_rows > 0){
+                while ($row = $results->fetch_object()){
+                    echo "<option value='$row->id'>$row->nome</option>";
+                }
+            }
+        } catch (Exeption $e){
+            echo "Erro: " . $e;
+        }
+    }
+    public function getProduto($produto_id){
+        $conn = new Database;
+        $query = "SELECT * FROM produtos WHERE id = $produto_id";
+
+        try{
+            $results = $conn->getConnection()->query($query);
+            if($results->num_rows > 0){
+                while ($row = $results->fetch_object()){
+                    echo "<td>$row->nome</td>";
+                    echo "<td id='val'>$row->preco</td>";
+                    echo "<td>$row->quantidade</td>";
+                }
+            }
+        } catch (Exeption $e){
+            echo "Erro: " . $e;
+        }
     }
 }
 
@@ -28,7 +57,7 @@ class Venda extends Produto {
     }
 
     public function getVenda(){
-        echo "";
+        
     }
 }
 
@@ -71,7 +100,9 @@ class Database {
         }
 
     }
-
+    public function getConnection(){
+        return $this->connection;
+    }
     public function closeConnection(){
         
     }
