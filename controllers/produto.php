@@ -39,6 +39,7 @@ class Produto {
             $results = $conn->getConnection()->query($query);
             if($results->num_rows > 0){
                 while ($row = $results->fetch_object()){
+                    echo "<input type='hidden' name='id_produto'value='$row->id'/>";
                     echo "<td>$row->nome</td>";
                     echo "<td id='val'>$row->preco</td>";
                     echo "<td id='quant'>$row->quantidade</td>";
@@ -52,12 +53,27 @@ class Produto {
 
 //Classe Venda
 class Venda extends Produto {
-    public function setVenda(){
-        echo "";
+    public function setVenda($produto_id, $quantidade, $valor){
+        $conn = new Database;
+        $stock = "SELECT * FROM produtos WHERE id = $produto_id";
+        $query = "INSERT INTO vendas (produto, quantidade_venda, valor_venda, data_venda) VALUES ($produto_id, $quantidade, $valor, NOW())";
+        $getStock = $conn->getConnection()->query($stock);
+        if($getStock->num_rows > 0){
+            $row = $getStock->fetch_object();
+            if($row->quantidade >= $quantidade){
+                try{
+                    $conn->getConnection()->query('UPDATE produtos SET quantidade = ' . $row->quantidade - $quantidade );
+                    $conn->getConnection()->query($query);
+                } catch (Exception $e){
+                    echo "Erro ao criar a venda: $e";
+                }
+            }
+        }
     }
+    
 
     public function getVenda(){
-        
+       echo ""; 
     }
 }
 

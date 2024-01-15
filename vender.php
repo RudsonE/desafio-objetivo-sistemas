@@ -1,8 +1,12 @@
 <?php
 session_start();
 require_once './controllers/produto.php';
-if(!isset($_POST['produto_id'])){
-    header("Location: index.php");
+// if(!isset($_POST['produto_id'])){
+//     header("Location: index.php");
+// }
+if(isset($_POST['id_produto'])){
+    $vnd = new Venda;
+    $vnd->setVenda($_POST['id_produto'], $_POST['quantidade'], $_POST['valor']);
 }
 ?>
 
@@ -21,7 +25,7 @@ if(!isset($_POST['produto_id'])){
     <div>
         <form action="" method="post" class="cadastro">
             <h3 class="title">Venda de Produtos</h3>
-            <table>
+            <table style="color: white;">
                 <thead>
                     <tr>
                         <th>Nome do Produto</th>
@@ -32,16 +36,18 @@ if(!isset($_POST['produto_id'])){
                 <tbody>
                         <tr>
                             <?php
+                            if(isset($_POST['produto_id'])){
                                 $prd = new Produto;
                                 $prd->getProduto($_POST['produto_id']);
+                            }
                             ?>
                         </tr>
                 </tbody>
         </table>
-            <input type="number" placeholder="Quantidade" class="text-box" min="1" id="qua" value="1">
+            <input name="quantidade" type="number" placeholder="Quantidade" class="text-box" min="1" id="qua" value="1">
             <input type="number" class="text-box" placeholder="Desconto em %" id="desc" min="0" max="100">
             <div>
-                <span style="color: white;">Total: R$ <span id="total">00.00</span></span>
+                <span style="color: white;">Total: R$ <input type="text" id="total" name="valor" value='00.00'/></span>
             </div>
             <button type="submit" class="btn-action">Finalizar</button>
             <button type="button" class="btn-action btn-secondary" onclick="abreLink('./vendas.php')">Cancelar</button>
