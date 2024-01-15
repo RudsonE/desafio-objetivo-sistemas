@@ -41,7 +41,7 @@ class Produto {
                 while ($row = $results->fetch_object()){
                     echo "<td>$row->nome</td>";
                     echo "<td id='val'>$row->preco</td>";
-                    echo "<td>$row->quantidade</td>";
+                    echo "<td id='quant'>$row->quantidade</td>";
                 }
             }
         } catch (Exeption $e){
@@ -76,7 +76,7 @@ class Database {
         try{
             $this->connection = new mysqli($this->host, $this->user, $this->password, $this->db);
             if($this->connection){
-                echo $this->connection->host_info;
+                //echo $this->connection->host_info;
             }
         } catch (Exception $e){
             die("Erro ao conectar ao banco de dados: " . $e);
