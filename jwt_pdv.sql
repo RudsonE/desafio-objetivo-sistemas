@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 14/01/2024 às 02:56
+-- Tempo de geração: 15/01/2024 às 21:01
 -- Versão do servidor: 10.4.28-MariaDB
 -- Versão do PHP: 8.2.4
 
@@ -31,8 +31,17 @@ CREATE TABLE `produtos` (
   `id` int(32) NOT NULL,
   `nome` varchar(32) NOT NULL,
   `preco` double NOT NULL,
-  `quantidade` int(32) NOT NULL
+  `quantidade` int(32) NOT NULL,
+  `data_cadastro` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Despejando dados para a tabela `produtos`
+--
+
+INSERT INTO `produtos` (`id`, `nome`, `preco`, `quantidade`, `data_cadastro`) VALUES
+(1, 'Coca-cola 1L', 7.92, 2, NULL),
+(8, 'Smartphone 256gb', 2500, 2, '2024-01-15 16:34:47');
 
 -- --------------------------------------------------------
 
@@ -45,8 +54,15 @@ CREATE TABLE `vendas` (
   `produto` int(32) NOT NULL,
   `quantidade_venda` int(32) NOT NULL,
   `valor_venda` double NOT NULL,
-  `data_venda` date NOT NULL
+  `data_venda` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Despejando dados para a tabela `vendas`
+--
+
+INSERT INTO `vendas` (`id`, `produto`, `quantidade_venda`, `valor_venda`, `data_venda`) VALUES
+(15, 8, 1, 2500, '2024-01-15 16:58:13');
 
 --
 -- Índices para tabelas despejadas
@@ -73,13 +89,13 @@ ALTER TABLE `vendas`
 -- AUTO_INCREMENT de tabela `produtos`
 --
 ALTER TABLE `produtos`
-  MODIFY `id` int(32) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(32) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT de tabela `vendas`
 --
 ALTER TABLE `vendas`
-  MODIFY `id` int(32) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(32) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- Restrições para tabelas despejadas

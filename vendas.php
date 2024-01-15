@@ -1,5 +1,5 @@
 <?php
-session_start();
+//aqui solicita a importação do arquivo contendo as classes
 require_once './controllers/produto.php';
 ?>
 
@@ -20,6 +20,7 @@ require_once './controllers/produto.php';
             <h3 class="title">Selecione um produto para iniciar a venda</h3>
             <select name="produto_id" id="" class="text-box">
                 <?php
+                //esse trecho instancia a classe produto e usa seu metodo para obter os produtos cadastrados
                     $prd = new Produto;
                     $prd->getProdutos();
                 ?>

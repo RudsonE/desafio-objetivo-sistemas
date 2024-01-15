@@ -77,3 +77,39 @@ body{
     padding: 5vw;
     border-radius: .5vw;
 }
+
+.sucesso{
+    display: flex;
+    background-color: #168821 ;
+    height: 3vw;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.erro{
+    display: flex;
+    background-color: #E52207 ;
+    height: 3vw;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.lista{
+    overflow: auto;
+    display: block;
+    align-items: center;
+    justify-content: center;
+    height: 50vh;
+    width: 30vw;
+    background-color: rgba(255, 255, 255, 0.1);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    flex-direction: column;
+    padding: 5vw;
+    border-radius: .5vw;
+    text-align: center;
+}

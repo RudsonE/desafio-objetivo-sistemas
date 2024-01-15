@@ -1,3 +1,4 @@
+<!--menu inicial-->
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -10,7 +11,8 @@
     <div class="menu-inicio">
         <h3 class="title">Mercadinho JWT</h3>
         <button class="btn-action" onclick="abreLink('./cadastros.php')">Cadastro de Produtos</button>
-        <button class="btn-action" onclick="abreLink('./vendas.php')">Vendas</button>
+        <button class="btn-action" onclick="abreLink('./vendas.php')">Vender</button>
+        <button class="btn-action" onclick="abreLink('./finalizadas.php')">Vendas Realizadas</button>
     </div>
 </body>
 <script>

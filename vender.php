@@ -1,15 +1,8 @@
 <?php
-session_start();
+//aqui solicita a importação do arquivo contendo as classes
 require_once './controllers/produto.php';
-// if(!isset($_POST['produto_id'])){
-//     header("Location: index.php");
-// }
-if(isset($_POST['id_produto'])){
-    $vnd = new Venda;
-    $vnd->setVenda($_POST['id_produto'], $_POST['quantidade'], $_POST['valor']);
-}
 ?>
-
+<!--Interface de venda-->
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -20,7 +13,14 @@ if(isset($_POST['id_produto'])){
 </head>
 <body>
     <div class="vendas">
-   
+        <?php
+        //verifica se os paramentros para realizar a venda foram recebidos
+            if(isset($_POST['id_produto'], $_POST['quantidade'], $_POST['valor'])){
+                //se sim, instancia a classe venda e insere a venda através do metodo setVenda()
+                $vnd = new Venda;
+                $vnd->setVenda($_POST['id_produto'], $_POST['quantidade'], $_POST['valor']);
+            }
+        ?>
     </div>
     <div>
         <form action="" method="post" class="cadastro">
@@ -36,8 +36,11 @@ if(isset($_POST['id_produto'])){
                 <tbody>
                         <tr>
                             <?php
+                            //esse trecho verifica se o produto_id foi recebido e renderiza as informações
                             if(isset($_POST['produto_id'])){
+                                //instancia da classe produto
                                 $prd = new Produto;
+                                //o metodo getProduto() busca o produto com o id recebido e renderiza as informações
                                 $prd->getProduto($_POST['produto_id']);
                             }
                             ?>
@@ -46,8 +49,9 @@ if(isset($_POST['id_produto'])){
         </table>
             <input name="quantidade" type="number" placeholder="Quantidade" class="text-box" min="1" id="qua" value="1">
             <input type="number" class="text-box" placeholder="Desconto em %" id="desc" min="0" max="100">
+            <input type="hidden" id="total" name="valor" value='00.00'/>
             <div>
-                <span style="color: white;">Total: R$ <input type="text" id="total" name="valor" value='00.00'/></span>
+                <span style="color: white;">Total: R$ <span id="second-value">00.00</span></span>
             </div>
             <button type="submit" class="btn-action">Finalizar</button>
             <button type="button" class="btn-action btn-secondary" onclick="abreLink('./vendas.php')">Cancelar</button>
